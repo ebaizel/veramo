@@ -48,7 +48,6 @@ import keyManager from './shared/keyManager'
 import didManager from './shared/didManager'
 import didComm from './shared/didcomm'
 import messageHandler from './shared/messageHandler'
-import { KeyDIDProvider } from '@veramo/did-provider-key'
 
 const databaseFile = 'local-database2.sqlite'
 const infuraProjectId = '5ffc47f65c4042ce847ef66a3fa70d4c'
