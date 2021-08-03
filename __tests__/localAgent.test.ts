@@ -51,6 +51,9 @@ import { FakeDidProvider, FakeDidResolver } from './utils/fake-did'
 import { Resolver } from 'did-resolver'
 import { getResolver as ethrDidResolver } from 'ethr-did-resolver'
 import { getResolver as webDidResolver } from 'web-did-resolver'
+import { getDidKeyResolver } from '../packages/did-provider-key'
+import { IDIDDiscovery, DIDDiscovery } from '../packages/did-discovery'
+import {contexts as credential_contexts} from '@transmute/credentials-context'
 import fs from 'fs'
 
 jest.setTimeout(30000)
@@ -69,6 +72,7 @@ import didComm from './shared/didcomm'
 import messageHandler from './shared/messageHandler'
 import didDiscovery from './shared/didDiscovery'
 import dbInitOptions from './shared/dbInitOptions'
+import contexts from '@veramo/credential-w3c/build/contexts'
 
 const infuraProjectId = '5ffc47f65c4042ce847ef66a3fa70d4c'
 const secretKey = '29739248cad1bd1a0fc4d9b75cd4d2990de535baf5caadfdf8d8f86664aa830c'
@@ -184,7 +188,10 @@ const setup = async (options?: IAgentOptions): Promise<boolean> => {
       new CredentialIssuer({
         ldCredentialModule: new LdCredentialModule({
             ldContextLoader: new LdContextLoader({
-              contextsPaths: [ LdDefaultContexts ]
+              contextsPaths: [
+                LdDefaultContexts,
+                credential_contexts as Map<string, object>
+              ]
             })
           })
         }
