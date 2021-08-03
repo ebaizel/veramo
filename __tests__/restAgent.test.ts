@@ -16,7 +16,13 @@ import { KeyManager } from '../packages/key-manager/src'
 import { DIDManager, AliasDiscoveryProvider } from '../packages/did-manager/src'
 import { DIDResolverPlugin } from '../packages/did-resolver/src'
 import { JwtMessageHandler } from '../packages/did-jwt/src'
-import { CredentialIssuer, ICredentialIssuer, W3cMessageHandler, LdCredentialModule } from '../packages/credential-w3c/src'
+import {
+  CredentialIssuer,
+  ICredentialIssuer,
+  W3cMessageHandler,
+  LdCredentialModule,
+  LdContextLoader, LdDefaultContexts,
+} from '../packages/credential-w3c/src'
 import { EthrDIDProvider } from '../packages/did-provider-ethr/src'
 import { WebDIDProvider } from '../packages/did-provider-web/src'
 import { KeyDIDProvider } from '../packages/did-provider-key/src'
@@ -181,7 +187,11 @@ const setup = async (options?: IAgentOptions): Promise<boolean> => {
       }),
       new DIDComm([new DIDCommHttpTransport()]),
       new CredentialIssuer({
-          ldCredentialModule: new LdCredentialModule()
+          ldCredentialModule: new LdCredentialModule({
+            ldContextLoader: new LdContextLoader({
+              contextsPaths: [ LdDefaultContexts ]
+            })
+          })
         }
       ),
       new SelectiveDisclosure(),
