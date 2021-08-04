@@ -75,7 +75,6 @@ import didComm from './shared/didcomm'
 import messageHandler from './shared/messageHandler'
 import didDiscovery from './shared/didDiscovery'
 import dbInitOptions from './shared/dbInitOptions'
-import contexts from '@veramo/credential-w3c/build/contexts'
 
 const infuraProjectId = '5ffc47f65c4042ce847ef66a3fa70d4c'
 const secretKey = '29739248cad1bd1a0fc4d9b75cd4d2990de535baf5caadfdf8d8f86664aa830c'
