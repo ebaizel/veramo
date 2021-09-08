@@ -1,23 +1,15 @@
 {
-  "name": "@veramo/did-comm",
-  "description": "Veramo messaging plugin implementing DIDComm v2.",
+  "name": "@veramo/utils",
+  "description": "Helper methods for Veramo plugins",
   "version": "2.1.2",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "generate-plugin-schema": "yarn veramo dev generate-plugin-schema"
-  },
-  "veramo": {
-    "pluginInterfaces": {
-      "IDIDComm": "./src/types/IDIDComm.ts"
-    }
+    "build": "tsc"
   },
   "dependencies": {
     "@stablelib/ed25519": "^1.0.2",
     "@veramo/core": "^2.1.0",
-    "@veramo/message-handler": "^2.1.0",
-    "@veramo/utils": "^2.1.0",
     "cross-fetch": "^3.1.4",
     "debug": "^4.1.1",
     "did-jwt": "5.7.0",
@@ -33,7 +25,6 @@
   "files": [
     "build/**/*",
     "src/**/*",
-    "plugin.schema.json",
     "README.md",
     "LICENSE"
   ],
@@ -41,11 +32,7 @@
     "access": "public"
   },
   "repository": "git@github.com:uport-project/veramo.git",
-  "author": "Simonas Karuzas <simonas.karuzas@mesh.xyz>",
-  "contributors": [
-    "Mircea Nistor <mircea.nistor@mesh.xyz",
-    "Oliver Terbu <oliver.terbu@mesh.xyz"
-  ],
+  "author": "Mircea Nistor <mircea.nistor@mesh.xyz>",
   "license": "Apache-2.0",
   "keywords": []
 }
