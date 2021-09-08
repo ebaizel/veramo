@@ -21,8 +21,7 @@ import {
   LdContextLoader,
   LdDefaultContexts,
   LdSuiteLoader,
-  VeramoEd25519Signature2018,
-  VeramoEcdsaSecp256k1RecoverySignature2020
+  VeramoEcdsaSecp256k1RecoverySignature2020,
 } from '../packages/credential-w3c/src'
 import { EthrDIDProvider } from '../packages/did-provider-ethr/src'
 import { WebDIDProvider } from '../packages/did-provider-web/src'
@@ -48,15 +47,13 @@ import {
   PrivateKeyStore,
   migrations,
 } from '../packages/data-store/src'
-import { createConnection, Connection } from 'typeorm'
-
 import { FakeDidProvider, FakeDidResolver } from './utils/fake-did'
+
+import { createConnection, Connection } from 'typeorm'
 import { Resolver } from 'did-resolver'
 import { getResolver as ethrDidResolver } from 'ethr-did-resolver'
 import { getResolver as webDidResolver } from 'web-did-resolver'
-import { getDidKeyResolver } from '../packages/did-provider-key'
-import { IDIDDiscovery, DIDDiscovery } from '../packages/did-discovery'
-import {contexts as credential_contexts} from '@transmute/credentials-context'
+import { contexts as credential_contexts } from '@transmute/credentials-context'
 import fs from 'fs'
 
 jest.setTimeout(30000)
@@ -162,9 +159,6 @@ const setup = async (options?: IAgentOptions): Promise<boolean> => {
           'did:key': new KeyDIDProvider({
             defaultKms: 'local',
           }),
-          'did:key': new KeyDIDProvider({
-            defaultKms: 'local',
-          }),
           'did:fake': new FakeDidProvider(),
         },
       }),
@@ -189,21 +183,16 @@ const setup = async (options?: IAgentOptions): Promise<boolean> => {
       new DIDComm([new DIDCommHttpTransport()]),
       new CredentialIssuer({
         ldCredentialModule: new LdCredentialModule({
-            ldContextLoader: new LdContextLoader({
-              contextsPaths: [
-                LdDefaultContexts,
-                credential_contexts as Map<string, object>
-              ]
-            }),
-            ldSuiteLoader: new LdSuiteLoader({
-              veramoLdSignatures: [
-                new VeramoEd25519Signature2018(),
-                new VeramoEcdsaSecp256k1RecoverySignature2020()
-              ]
-            })
-          })
-        }
-      ),
+          ldContextLoader: new LdContextLoader({
+            contextsPaths: [LdDefaultContexts, credential_contexts as Map<string, object>],
+          }),
+          ldSuiteLoader: new LdSuiteLoader({
+            veramoLdSignatures: [
+              new VeramoEcdsaSecp256k1RecoverySignature2020(),
+            ],
+          }),
+        }),
+      }),
       new SelectiveDisclosure(),
       new DIDDiscovery({
         providers: [new AliasDiscoveryProvider(), new ProfileDiscoveryProvider()],
